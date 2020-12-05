@@ -1,9 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
-import os
-#URL = 'https://hh.kz/search/resume'
-HOST = 'https://hh.kz'
+
 class GetHtml:
     HEADERS = {'User-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'}
     PARAMS = {
@@ -27,10 +24,11 @@ class GetHtml:
 a = GetHtml()
 html = a.html('https://hh.kz/search/resume', 'директор по маркетингу')
 
-#то что ниже пока написано для проверки
+#код ниже для проверки корректности html 
 items = html.find_all('div', class_='resume-search-item')
 content = []
 for item in items:
+    HOST = 'https://hh.kz'
     content.append({
         'title': item.find('a', class_='resume-search-item__name').get_text(strip=True),
         'link': HOST + item.find('a', class_='resume-search-item__name').get('href'),
